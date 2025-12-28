@@ -1,0 +1,143 @@
+\input{../def.tex}
+
+\begin{document}
+
+\avantgarde
+
+\section{Delphi for Palm\,OS}
+
+In the year 2000,
+I wrote an astrology program called \textsl{Delphi} for Palm\,OS handheld devices,
+which not only allowed to display horoscope charts,
+but also to tap on shown elements,
+for example,
+in order to show only aspects to a certain planet.
+%
+In order to calculate planetary positions
+and to get coordinates and time zones for places world-wide,
+I wrote an astrological software library called \textsl{astrolib}
+to go with Delphi.
+
+Moreover,
+in the about screen of Delphi,
+I placed cryptographic hashes and digital signatures
+in order to be later able to to prove
+that I had already formulated certain ideas at the time.
+
+\subsection{Details}
+
+Delphi and astrolib were first published 7 October 2000.
+%
+The initial versions of Delphi were black and white
+and astrolib contained information for about 350 locations around the world.
+%
+In 2001,
+first support for synastry relationship charts followed,
+then color charts
+and in astrolib data for about 2000 additional locations world-wide.
+
+The screen resolution available to Delphi was only 160 $\times$ 160 pixels:
+
+\vspace{5mm}\noindent
+\includegraphics[scale=0.2]{i-delphi-color.jpg}
+
+\vspace{5mm}
+\noindent
+In order to still be able to display a lot of useful information,
+it was possible to tap on practically all visible items on the screen:
+
+\begin{list}{$\bullet$}{\setlength{\leftmargin}{13pt}}
+%
+\item Planets in the chart or in the list to the right,
+to show for example only aspects to the Moon
+and to show its position with arc minutes in the list.
+\vspace{-2mm}
+%
+\item Aspects, to show for example only squares.
+\vspace{-2mm}
+\item Star signs,
+for example,
+to show only planets in Leo.
+\vspace{-2mm}
+%
+\item The house symbol in the upper left corner,
+to switch to a view with houses instead of aspects.
+\vspace{-2mm}
+%
+\item Houses,
+to show only planets in a certain house,
+as well as the the position of the house cusp.
+\vspace{-2mm}
+%
+\item The clock symbol in the lower left corner,
+to display a chart for the current time,
+for a selectable location and time zone.
+\vspace{-2mm}
+%
+\item The name in the top right corner,
+to edit birth data.
+\end{list}
+
+\noindent
+Preferences allowed to define orbs
+and to select a house system (Placidus, Koch or no houses).
+%
+It was even possible to “beam” charts between devices
+using the integrated infrared beamers.
+%
+Some more screen shots:
+
+\vspace{5mm}\noindent
+\includegraphics[scale=0.4]{i-delphi-more.jpg}
+
+\vspace{5mm}
+\noindent
+Delphi was relatively successful,
+many thousands of downloads.
+%
+I once saw an astrologer who used it on his PalmPilot
+and it also appeared on several CDs that often came with magazines at the time.
+%
+In the book \textsl{“PalmPilot and Palm Organizers! I Didn’t Know You Could Do That…”},
+Second Edition, by Neil J.~Salkind, 2001,
+Delphi is mentioned in the book
+and Delphi 1.21 is included on the accompanying CD.
+
+A few technical details:
+Delphi used routines I wrote myself in order to draw circles,
+as well as dashed and dotted lines,
+because the former,
+as provided by the OS,
+were too slow,
+and the latter did not exist at all.
+%
+Astrolib compressed Unix tz data a lot in order to remain compact
+and since the memory stack was so small,
+some astrolib functions had to use static variables
+instead of parameters and local variables.
+
+Hidden in the about screens of Delphi,
+I placed cryptographic hashes and digital signatures
+of some of my own original works about the world,
+including astrology,
+which I had not yet published at the time.
+%
+In the three images below,
+each time the Apollon temple at Delphi in Greece is shown,
+but the apparently noisy underground differs each time
+and contains the respective cryptographic hashes and digital signatures:
+
+\vspace{5mm}\noindent
+\includegraphics[scale=0.4]{i-delphi-about.jpg}
+
+\newpage
+\noindent
+Here is the web site for Delphi at the time.
+%
+By the way,
+the image at the top shows the temple of Athena Pronoia at Delphi:
+
+\vspace{5mm}\noindent
+\includegraphics[scale=0.335]{i-delphi-web.jpg}
+
+\end{document}

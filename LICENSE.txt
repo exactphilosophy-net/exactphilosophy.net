@@ -1,0 +1,7 @@
+Everything here, unless specifically mentioned, is:
+
+  Copyright 2002-now Alain Stalder.
+  All rights reserved.
+
+This means that, as with any published documents, you are allowed
+to quote short passages, but not any larger portions of this work.

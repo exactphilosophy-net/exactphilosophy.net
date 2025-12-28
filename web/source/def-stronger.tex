@@ -1,0 +1,23 @@
+% stronger fonts
+
+% Find modes.mf, e.g. /usr/local/texlive/2025/texmf-dist/fonts/source/public/modes/modes.mf
+%
+% $ sudo cp modes.mf modes.mf.orig
+%
+% Add the following at the start of modes:
+%
+% mode_def xphi =
+%   mode_param (pixels_per_inch, 1200);
+%   mode_param (blacker, 1.9); % only difference to 'lexmarkr' (2 there)
+%   mode_param (fillin, 0);
+%   mode_param (o_correction, 1);
+%   mode_common_setup_;
+% enddef;
+%
+% Finally:
+%
+% $ sudo fmtutil-sys --byfmt mf
+
+\pdfpkresolution=1200
+\pdfpkmode={xphi}
+\pdfmapfile{}

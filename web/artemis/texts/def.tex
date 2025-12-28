@@ -1,0 +1,29 @@
+% letter is the default on my mac, but to make sure
+\documentclass[twoside,11pt,letterpaper]{article}
+\pagestyle{plain}
+\textheight=238mm
+\oddsidemargin=12.2mm
+\evensidemargin=12.2mm
+\topmargin=-15mm
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,italian,french,ngerman,english]{babel} % last is main
+\usepackage{graphicx}
+\usepackage[hidelinks,pdfpagelabels=false]{hyperref}
+\usepackage{bookmark}
+\usepackage{xcolor}
+\usepackage{contour}
+\usepackage{pict2e}
+\usepackage{relsize}
+\usepackage{ifthen}
+
+\renewcommand{\thepage}{\footnotesize\color{gray}\arabic{page}}
+
+\newcommand{\avantgarde}{
+  \thispagestyle{empty}
+  \noindent\hspace{-3.5mm}\href{https://www.exactphilosophy.net/}{\includegraphics[scale=0.25]{../i-title.pdf}}\par
+  \vspace{-4.85mm}\subsubsection{\href{https://www.exactphilosophy.net/}{\color{avant}avantgarde}}
+}
+
+\def\sourcepath{../../../source}
+\input{\sourcepath/def-lib.tex}

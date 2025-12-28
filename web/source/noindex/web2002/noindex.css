@@ -1,0 +1,23 @@
+img.noindex {
+  display: inline-block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+
+body {
+  font-family: Helvetica, Verdana, Arial, sans-serif;
+}
+
+span.white {
+  color: white;
+}
+
+ul.reviews {
+  margin: 0;
+}
+
+li.reviews {
+  margin-left: -1.4em;
+}

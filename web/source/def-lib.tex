@@ -1,0 +1,171 @@
+\usepackage{iftex}
+\ifpdftex
+  \input{\sourcepath/def-stronger.tex}
+  \newcommand{\coretextwidth}{85.5mm}
+\fi
+
+% experimental, not used to produce the live website...
+\ifluatex
+  % about same heaviness in pdfs when rasterized in photoshop,
+  % but since, unlike the metafont mechanisms I use, fake bold, "bleeds" in all directions,
+  % seems heavier at least in core web page images
+  \newcommand{\fontbleed}{0.8}
+  % paragraphs wider and font looks larger, tried to fix, but then other things change a bit,
+  % especially for section headings would have to change back, are now more narrow...
+  \newcommand{\fontscale}{0.985}
+  \newcommand{\coretextwidth}{85.2mm}
+  \usepackage{fontspec}
+  % microtype does maybe help and not help, maybe if would allow wider spaces...
+  \usepackage{microtype}
+  \setsansfont{Latin Modern Sans}[Scale=\fontscale, FakeBold=\fontbleed]
+  \setmonofont{Latin Modern Mono}[Scale=\fontscale, FakeBold=\fontbleed]
+  % this would be for "new computer modern" (but has many limitations so far)
+  %\usepackage[default]{fontsetup}
+  %\renewcommand{\familydefault}{\sfdefault}
+\fi
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\setcounter{secnumdepth}{-1}
+
+\newcommand{\en}[1]{\iflanguage{english}{#1}{}}
+\newcommand{\de}[1]{\iflanguage{ngerman}{#1}{}}
+\newcommand{\fr}[1]{\iflanguage{french}{#1}{}}
+
+% a bit less than ~255/256
+\definecolor{almostwhite}{gray}{0.996}
+\definecolor{xphi}{rgb}{0.0,0.5,0.5}
+\definecolor{avant}{rgb}{1,0.5,0.5}
+
+\definecolor{frame}{gray}{0.9}
+\definecolor{lightgray}{gray}{0.8}
+\definecolor{gray}{gray}{0.5}
+\definecolor{darkgray}{gray}{0.3}
+
+\definecolor{darkred}{rgb}{0.8,0.0,0.0}
+\definecolor{darkyellow}{rgb}{0.7,0.7,0.0}
+\definecolor{darkgreen}{rgb}{0.0,0.55,0.0}
+\definecolor{darkviolet}{rgb}{0.5,0,0.5}
+
+\definecolor{darkblue}{rgb}{0,0,0.7}
+\definecolor{odyssey}{rgb}{0,0,0.8}
+\definecolor{indigo}{rgb}{0.29,0,0.51}
+\definecolor{indigoblue}{rgb}{0.1,0,0.6}
+
+\definecolor{saffronback}{rgb}{1.000,0.878,0.627}
+\definecolor{saffronfront}{rgb}{0.376,0.125,0.000}
+
+\DeclareRobustCommand{\cometartemisscale}[1]{\includegraphics[scale=#1]{\sourcepath/i-comet.jpg}\hspace{-0.028453em} artemis}
+\newcommand\cometartemis{\cometartemisscale{0.018}}
+\newcommand\cometartemissection{\cometartemisscale{0.0225}}
+
+\DeclareRobustCommand{\moebius}[1]{\includegraphics[scale=#1]{\sourcepath/i-moebius.jpg}}
+\newcommand{\yinyang}{\includegraphics[scale=0.135]{\sourcepath/i-yinyang.jpg}}
+
+\newcommand{\rarr}{\,$\rightarrow$\,}
+\newcommand{\lrarr}{\,$\leftrightarrow$\,}
+
+% greek elements
+\newcommand{\elfire}{
+\begin{picture}(9,6)
+  \thicklines
+  \put(1,-0.5){\line(1,0){7}}
+  \put(1,-0.5){\line(1,1.732){3.5}}
+  \put(8,-0.5){\line(-1,1.732){3.5}}
+\end{picture}}
+%
+\newcommand{\elair}{
+\begin{picture}(9,6)
+  \thicklines
+  \put(1,-0.5){\line(1,0){7}}
+  \put(1,-0.5){\line(1,1.732){3.5}}
+  \put(8,-0.5){\line(-1,1.732){3.5}}
+  \put(2.75,1.9){\line(1,0){3.5}}
+\end{picture}}
+%
+\newcommand{\elwater}{
+\begin{picture}(9,6)
+  \thicklines
+  \put(1,5){\line(1,0){7}}
+  \put(1,5){\line(1,-1.732){3.5}}
+  \put(8,5){\line(-1,-1.732){3.5}}
+\end{picture}}
+%
+\newcommand{\elearth}{
+\begin{picture}(9,6)
+  \thicklines
+  \put(1,5){\line(1,0){7}}
+  \put(1,5){\line(1,-1.732){3.5}}
+  \put(8,5){\line(-1,-1.732){3.5}}
+  \put(2.75,2.5){\line(1,0){3.5}}
+\end{picture}}
+%
+\newcommand{\elhex}{
+\begin{picture}(9,6)
+  \thicklines
+  \put(1,0.5){\line(1,0){7}}
+  \put(1,0.5){\line(1,1.732){3.5}}
+  \put(8,0.5){\line(-1,1.732){3.5}}
+  \put(1,5){\line(1,0){7}}
+  \put(1,5){\line(1,-1.732){3.5}}
+  \put(8,5){\line(-1,-1.732){3.5}}
+\end{picture}}
+
+% i ching trigrams
+\newcommand{\trigram}[3]{
+\begin{picture}(9,6)
+  \linethickness{0.36mm}
+  \put(0,5){\line(1,0){#1}}
+  \put(5.5,5){\line(1,0){3.5}}
+  \put(0,2.5){\line(1,0){#2}}
+  \put(5.5,2.5){\line(1,0){3.5}}
+  \put(0,0){\line(1,0){#3}}
+  \put(5.5,0){\line(1,0){3.5}}
+\end{picture}}
+\newcommand{\triheaven}{\trigram{5.5}{5.5}{5.5}}
+\newcommand{\triearth}{\trigram{3.5}{3.5}{3.5}}
+\newcommand{\trithunder}{\trigram{3.5}{3.5}{5.5}}
+\newcommand{\triwater}{\trigram{3.5}{5.5}{3.5}}
+\newcommand{\trimountain}{\trigram{5.5}{3.5}{3.5}}
+\newcommand{\triwind}{\trigram{5.5}{5.5}{3.5}}
+\newcommand{\trifire}{\trigram{5.5}{3.5}{5.5}}
+\newcommand{\trilake}{\trigram{3.5}{5.5}{5.5}}
+
+% i ching hexagrams
+% 1+2 trigrams, 3 rest of line (see e.g. dreams.tex)
+\DeclareRobustCommand{\hexagram}[3]{\raisebox{-3pt}{$\overset{\text{${#1}$}}{#2}$\,}#3\vspace{3pt}}
+
+% white-red-black etc.
+\DeclareRobustCommand{\outline}[1]{\contour{black}{{\color{white}#1}}}
+\DeclareRobustCommand{\white}[1]{\outline{\textbf{#1}}}
+\DeclareRobustCommand{\red}[1]{{\color{darkred}\textbf{#1}}}
+\DeclareRobustCommand{\black}[1]{\textbf{#1}}
+\DeclareRobustCommand{\yellow}[1]{{\color{darkyellow}\textbf{#1}}}
+\DeclareRobustCommand{\green}[1]{{\color{darkgreen}\textbf{#1}}}
+\DeclareRobustCommand{\violet}[1]{{\color{darkviolet}\textbf{#1}}}
+\DeclareRobustCommand{\indigoblue}[1]{{\color{indigoblue}\textbf{#1}}}
+\DeclareRobustCommand{\indigo}[1]{{\color{indigo}\textbf{#1}}}
+
+% ELEMENTAL
+\newcommand{\ELEMENTAL}{%
+\colorlet{contour}{.}\textbf{\color{white}%
+\raisebox{+0.001em}{\contour{contour}{E}}%
+\raisebox{+0.015em}{\contour{contour}{L}}%
+\raisebox{+0.016em}{\contour{contour}{E}}%
+\raisebox{+0.023em}{\contour{contour}{M}}%
+\raisebox{+0.023em}{\contour{contour}{E}}%
+\raisebox{+0.017em}{\contour{contour}{N}}%
+\raisebox{-0.020em}{\contour{contour}{T}}%
+\raisebox{-0.002em}{\contour{contour}{A}}%
+\raisebox{+0.006em}{\contour{contour}{L}}%
+}}
+
+% artemis pdf+web icons
+\newcommand{\ipdfen}{\includegraphics[scale=0.5]{i-pdf-en.png}}
+\newcommand{\ipdfde}{\includegraphics[scale=0.5]{i-pdf-de.png}}
+\newcommand{\ipdffr}{\includegraphics[scale=0.5]{i-pdf-fr.png}}
+\newcommand{\iweb}{\includegraphics[scale=0.055]{i-web.png}}
+\newcommand{\ipdfblueen}{\includegraphics[scale=0.5]{i-pdf-blue-en.png}}
+\newcommand{\ipdfbluede}{\includegraphics[scale=0.5]{i-pdf-blue-de.png}}
+\newcommand{\ipdfbluefr}{\includegraphics[scale=0.5]{i-pdf-blue-fr.png}}
+\newcommand{\iwebblue}{\includegraphics[scale=0.055]{i-web-blue.png}}

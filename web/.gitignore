@@ -1,0 +1,11 @@
+Icon[^M]
+
+/sink
+/workbook
+/workpocket
+/.idea
+
+*.aux
+*.log
+*.synctex.gz
+*.synctex(busy)
