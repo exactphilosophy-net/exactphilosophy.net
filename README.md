@@ -17,7 +17,7 @@ With the following omissions:
 
 - `artemis/perma/web*.zip`
 - `source/noindex/books/{xphi|ste}*.pdf`
-- `source/noindex/odyssey/{usenet|astro|yijing|babylon}{.html|/}`
+- `source/noindex/odyssey/{<venue>}{.html|/}`
 - `source/shared/vnu/vnu.jar`
 
 It is mostly pdfLaTeX and HTML with images, built with basic bash.
