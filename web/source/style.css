@@ -123,6 +123,10 @@ p.leads {
   font-size:14pt;
 }
 
+p.footnote {
+  font-size:14pt;
+}
+
 ul.left {text-align: left}
 li.circle {list-style-type: circle}
 li.diamond {list-style-type: "◇"}

@@ -14,11 +14,13 @@ function main {
     elif [ "$ARG" == "publish" ]; then publish
     elif [ "$ARG" == "validate" ]; then validate
     elif [ "${ARG##*.}" == "img" ]; then img "${ARG%.*}" ""
-    elif [ "${ARG##*/}" == "" ]; then img "${ARG%/}" ""
+    elif [ "${ARG##*/}" == "" ]; then imgOneLangOrAll "${ARG%/}";
     elif [ "$ARG" == "pocket" ]; then pocket
+    elif [ "$ARG" == "odyssey" ]; then odyssey
+    elif [ "$ARG" == "t1e1s" ]; then t1e1s
     elif [ "$ARG" == "debug" ]; then set -x
     else
-      printf "unknown target '$ARG'\n$(tput bold)usage: $(basename "$0") [lua|web|pdfs|imgs|publish|validate|*.img|*/|pocket]*$(tput sgr 0)\n" >&2
+      printf "unknown target '$ARG'\n$(tput bold)usage: $(basename "$0") [lua|web|pdfs|imgs|publish|validate|*.img|*/|pocket|odyssey|t1e1s]*$(tput sgr 0)\n" >&2
       exit 1
     fi
   done
@@ -40,7 +42,7 @@ function dofail {
 function setup {
   cd "${0%/*}/.."
   
-  LATEX="pdflatex"
+  TEX="pdflatex"
 
   WEBDIR=$(pwd)
   WEBS=""
@@ -81,7 +83,8 @@ function setup {
   ARTS="$ARTS cognition/quellen-der-erkenntnis"
   ARTS="$ARTS elements/the-pyramids-and-the-four-elements"
   ARTS="$ARTS elements/the-roots-of-the-four-elements-in-empedocles-poem-and-similarly-veiled-in-the-hippocratic-oath"
-  ARTS="$ARTS neutrinos/are-dark-matter-and-energy-neutrinos"
+  ARTS="$ARTS meta/are-dark-matter-and-energy-neutrinos"
+  ARTS="$ARTS meta/life-is-awareness"
   ARTS="$ARTS paradoxes/paradox-of-love"
   ARTS="$ARTS paradoxes/paradox-of-measurement"
   ARTS="$ARTS paradoxes/paradox-of-solar-eclipses"
@@ -114,18 +117,24 @@ function setup {
   ARTS="$ARTS cargo-cult-astrology/cargo-kult-astrologie"
   ARTS="$ARTS zeitzeugnisse/wei-chi"
   ARTS="$ARTS zeitzeugnisse/renegades"  
+  ARTS="$ARTS zeitzeugnisse/where-its-at"  
   ARTS="$ARTS lego/moebius-lego"
   ARTS="$ARTS art/die-neugierige-statue"
   ARTS="$ARTS art/elemental-improvisation"
   ARTS="$ARTS art/visual-art-gallery"
   ARTS="$ARTS art/way-of-the-fox"
+  
+  SERIESDIR="series/series"
+  SERIES=""
+  SERIES="$SERIES t1/t1e1/t1e1s-en-space-time-elements"
+  SERIES="$SERIES t1/t1e1/t1e1s-de-raum-zeit-elemente"
 
   . source/shared/ssh-publisher.sh
   . source/shared/web-validator.sh
 }
 
 function lua {
-  LATEX="lualatex"
+  TEX="lualatex"
 }
 
 function webs {
@@ -213,9 +222,20 @@ function pdfs {
 function texToPdf {
   local DIR="$1"
   cd "$DIR"
-  local TEX="$2"
-  #echo "$DIR - $TEX"
-  $LATEX -interaction=batchmode "$TEX" >/dev/null
+  local FILE="$2"
+  local PROG=$(getTexProg "$FILE")
+  #echo "$DIR - $PROG $FILE"
+  $PROG -interaction=batchmode "$FILE" >/dev/null
+}
+
+function getTexProg {
+  local FILE="$1"
+  local PROG
+  PROG=$(head -n 1 "$FILE" | grep TS-program | cut -d " " -f 5)
+  if  [ "$PROG" == "" ]; then
+    PROG="$TEX"
+  fi
+  echo "$PROG"
 }
 
 function imgs {
@@ -228,6 +248,17 @@ function imgs {
     done
   done
   echo " $SECONDS secs"
+}
+
+function imgOneLangOrAll {
+  local ITEM="$1"
+  if [ "${ITEM:(-3):1}" == "-" ]; then
+    img "$ITEM" ""
+  else
+    for LANG in $(langs); do
+      img "$ITEM-$LANG" ""
+    done
+  fi
 }
 
 function img {
@@ -287,7 +318,7 @@ function getImgExt {
   local ITEM="$1"
   if isMenu "$ITEM"; then
     echo "png"
-  elif [ "$ITEM" == "artemis" ]; then
+  elif [ "$ITEM" == "artemis" -o "$ITEM" == "series" ]; then
     echo "png"
   else
     echo "jpg"
@@ -344,6 +375,7 @@ function web {
   webClean
   webPages
   webArts
+  webSeries
   webGeneral
   webWidthsCss
   webSitemap
@@ -482,8 +514,18 @@ function webArts {
   cd "$WEBDIR"
   for ART in $ARTS; do
     ln -s "../$ARTDIR/$ART.pdf" sink
-    for EXT in aux log synctex.gz; do
+    for EXT in aux log synctex.gz "synctex(busy)"; do
 	  if [ -f "$ARTDIR/$ART.$EXT" ]; then rm "$ARTDIR/$ART.$EXT"; fi
+	done
+  done
+}
+
+function webSeries {
+  cd "$WEBDIR"
+  for SERIE in $SERIES; do
+    ln -s "../$SERIESDIR/$SERIE.pdf" sink
+    for EXT in aux log out synctex.gz "synctex(busy)" toc; do
+	  if [ -f "$SERIESDIR/$SERIE.$EXT" ]; then rm "$SERIESDIR/$SERIE.$EXT"; fi
 	done
   done
 }
@@ -494,7 +536,7 @@ function webGeneral {
   for MENU in $(menus); do
     for LANG in $(langs); do
       ln -s "../source/$MENU-$LANG.jpg" sink
-      for EXT in aux log synctex.gz; do
+      for EXT in aux log synctex.gz "synctex(busy)"; do
 	    if [ -f "source/$MENU-$LANG.$EXT" ]; then rm "source/$MENU-$LANG.$EXT"; fi
 	  done
 	done
@@ -526,12 +568,18 @@ function webWidthsCss {
   done
   echo >> sink/widths.css
   for WEB in $(webs); do
-    if [ "$WEB" == "artemis" ]; then
-      for FILE in $(cd artemis; ls artemis-*.jpg); do
+    if [ "$WEB" == "artemis" -o "$WEB" == "series" ]; then
+      local HILITE
+      if [ "$WEB" == "artemis" ]; then
+        HILITE="#80ff80"
+      else
+        HILITE="#80ffff"
+      fi
+      for FILE in $(cd $WEB; ls $WEB-*.jpg); do
         NAME="${FILE%.*}"
-        local WIDTH; WIDTH=$(getImageHalfWidth "artemis/$FILE")
+        local WIDTH; WIDTH=$(getImageHalfWidth "$WEB/$FILE")
         echo "svg.$NAME {max-width: ${WIDTH}px}" >> sink/widths.css
-        echo "svg.$NAME rect:hover {fill:#80ff80}" >> sink/widths.css
+        echo "svg.$NAME rect:hover {fill:$HILITE}" >> sink/widths.css
       done
     else
       for LANG in $(langs); do
@@ -618,8 +666,8 @@ function validate {
   local TARGET_DOMAIN=www.exactphilosophy.net
   # not excluding other forums, yet, because might more likely still change there
   local DIRS_TO_SKIP_IN_SIZE_VALIDATION="noindex/odyssey/astro/img"
-  # temporary: exclude test files for LaTeX Stack Exchange
-  local HTML_FILES_TO_VALIDATE_EXPR="find -L * -type f -name '*.html' | sed -e '/origins-maxai.html/d' | sed -e '/origins-make4ht.html/d'"
+  #local DIRS_TO_SKIP_IN_SIZE_VALIDATION=""
+  local HTML_FILES_TO_VALIDATE_EXPR="find -L * -type f -name '*.html'"
   webValidator_validateFileSizes $SOURCE_DIR $TARGET_DOMAIN $DIRS_TO_SKIP_IN_SIZE_VALIDATION
   webValidator_validateHtmlFiles $SOURCE_DIR "$HTML_FILES_TO_VALIDATE_EXPR"
 }
@@ -708,6 +756,55 @@ function pocketWebpagesDef {
 function pdfPageCount {
   local PDFFILE="$1"
   identify "$PDFFILE" 2>/dev/null | wc -l | tr -d ' '
+}
+
+function odyssey {
+  validateImageLinks
+}
+
+function validateImageLinks {
+  cd "$WEBDIR/source/noindex/odyssey"
+  local NUNLINKED=0
+  for FORUM in usenet astro yijing babylon; do
+    local FILES="$FORUM"
+    if [ "$FORUM" == "astro" ];  then
+      FILES="astro astro2"
+    fi
+    for FILE in $FILES; do
+      declare N_$FILE=0
+    done
+    for IMG in $(ls $FORUM/img); do
+      #echo "$FORUM $IMG"
+      local NTOTAL=0
+      for FILE in $FILES; do
+        N=$(cat $FILE.html | grep $FORUM/img/$IMG | wc -l)
+        if [ $N -ge 1 ]; then
+          let N_$FILE=$((N_$FILE + 1))
+        fi
+        NTOTAL=$((NTOTAL + N))
+      done
+      if [ $NTOTAL -eq 0 ]; then
+        NUNLINKED=$((NUNLINKED + 1))
+        echo "$FORUM $IMG"
+      fi
+    done
+    for FILE in $FILES; do
+      local VARNAME=N_$FILE
+      local NLINKED=${!VARNAME}
+      echo "$FILE $NLINKED linked images"
+    done
+  done
+  [ $NUNLINKED -eq 0 ]
+}
+
+function t1e1s {
+  cd "$WEBDIR/series/series/t1/t1e1"
+  ./t1e1s.sh
+  # twice for toc
+  for N in {1..2}; do
+    texToPdf . t1e1s-en-space-time-elements.tex
+    texToPdf . t1e1s-de-raum-zeit-elemente.tex
+  done
 }
 
 function fail {

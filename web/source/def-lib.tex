@@ -36,6 +36,7 @@
 \definecolor{almostwhite}{gray}{0.996}
 \definecolor{xphi}{rgb}{0.0,0.5,0.5}
 \definecolor{avant}{rgb}{1,0.5,0.5}
+\definecolor{series}{rgb}{0.01,0.71,0.65}
 
 \definecolor{frame}{gray}{0.9}
 \definecolor{lightgray}{gray}{0.8}
@@ -159,6 +160,10 @@
 \raisebox{-0.002em}{\contour{contour}{A}}%
 \raisebox{+0.006em}{\contour{contour}{L}}%
 }}
+
+% series progress bar
+\newcommand{\seriesprogress}[1]{\progressbar[filledcolor=series,emptycolor=white,roundnessr=0,ticksheight=0,tickswidth=0]{#1}}
+\newcommand{\seriesminiprogress}[1]{\progressbar[filledcolor=series,emptycolor=white,roundnessr=0,ticksheight=0,tickswidth=0,heightr=0.7,width=2em]{#1}}
 
 % artemis pdf+web icons
 \newcommand{\ipdfen}{\includegraphics[scale=0.5]{i-pdf-en.png}}

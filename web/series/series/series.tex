@@ -1,0 +1,260 @@
+\documentclass{book}
+
+\usepackage[ngerman,english]{babel}
+\usepackage[includefoot,includehead]{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage{contour}
+\usepackage{fontspec}
+\usepackage{sectsty}
+\usepackage{pdfpages}
+\usepackage[hidelinks]{hyperref}
+\usepackage{datetime2}
+\usepackage{microtype}
+
+% Dual language shortcuts
+\newcommand{\en}[1]{\iflanguage{english}{#1}{}}
+\newcommand{\de}[1]{\iflanguage{ngerman}{#1}{}}
+
+% TODO If necessary adapt FakeBold before publication
+% (0.6 is same as in ELEMENTAL in autumn 2025)
+\setsansfont[
+  Renderer=Node,
+  Path=../../,
+  Extension=.ttf,
+  UprightFont=*Regular,
+  BoldFont=*Bold,
+  FakeBold=0.6,
+  SlantedFont=*Regular,
+  BoldSlantedFont=*Bold,
+  SlantedFeatures={FakeSlant=0.15},
+  BoldSlantedFeatures={FakeSlant=0.15},
+  Scale=0.98,
+]{AlteHaasGrotesk}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Historically defined by what was needed to fit the exactphilosophy core webpages in
+% in the “Space Time Elements at exactphilosophy.net” pocket books of 2020 and 2021
+% (and I still want them to fit in in tome 1 of the series); 85.5mm as already in discoveries
+% and I presume also in my dissertation at IBM Research / Uni Fribourg...
+% - ratio paperheight/paperwidth = 1.583... close to the golden ratio 1.618...
+% - textwidth: 120 - (0.64 + 0.5) x 25.4 = 91.044 mm
+% - textheight: 190 - (0.263 + 0.613) x 25.4 = 167.750 mm
+% - effective text height (without page number) measured ca. 145 mm
+%    => ratio 145 / 90 = 1.611... even closer to the golden ratio 1.618...
+\geometry{
+  twoside=true,
+  paperwidth=120mm,
+  paperheight=190mm,
+  top=0.263in,
+  bottom=0.613in,
+  inner=0.64in,
+  outer=0.5in,
+  bindingoffset=0cm,
+}
+
+% Redefine plain page style
+\fancypagestyle{plain}{%
+\fancyhf{} % clear all header and footer fields
+\fancyfoot[C]{\small\thepage} % except the center
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+
+% By default page number on each page
+\pagestyle{plain}
+
+% No numbering for chapters and below
+\setcounter{secnumdepth}{-1}
+
+% Some colors
+\definecolor{seriesDarkred}{rgb}{0.8,0.0,0.0}
+\definecolor{seriesTurquoise}{rgb}{0.008,0.710,0.686}
+\definecolor{seriesOdyssey}{rgb}{0,0,0.8}
+\definecolor{seriesXphi}{rgb}{0.0,0.5,0.5}
+\definecolor{seriesGray}{gray}{0.5}
+\definecolor{seriesDarkGray}{gray}{0.3}
+
+\newcommand{\txex}{t\seriesTomeEditionNo e\seriesTomeNo}
+
+% Outlined text in various colors
+\newcommand{\seriesOutline}[4]{\contourlength{#1}\contour{#2}{\textbf{\color{#3}#4}}}
+\newcommand{\seriesWhite}[1]{\seriesOutline{0.8pt}{black}{white}{#1}}
+\newcommand{\seriesRed}[1]{\seriesOutline{0.3pt}{seriesDarkred}{seriesDarkred}{#1}}
+\newcommand{\seriesBlack}[1]{\seriesOutline{0.3pt}{black}{black}{#1}}
+
+% My name as text and for second title page
+\newcommand{\seriesAuthor}{Alain Stalder}
+\newcommand{\seriesAuthorColor}{\seriesOutline{0.2pt}{black}{seriesTurquoise}{\seriesAuthor}}
+
+% Chapter titles in color and with less vertical space before text begins (middle number 50pt to -12pf)
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries \color{seriesTurquoise}}{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{-12pt}{40pt}
+
+% Section titles in color
+\sectionfont{\color{seriesOdyssey}}
+
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+% Front cover (for digital versions only)
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+\newcommand{\seriesFrontCover}{
+\en{\includepdf{\txex-en-front.jpg}}%
+\de{\includepdf{\txex-de-front.jpg}}
+\thispagestyle{empty}
+\mbox{ }
+\newpage
+\clearpage
+\setcounter{page}{1}}
+
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+% First title page (just the title, no author, publisher, year)
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+\newcommand{\seriesFirstTitlePage}{
+\thispagestyle{empty}
+\vspace*{13.42mm}
+\noindent
+\begin{minipage}[t][90mm][t]{\textwidth}
+\seriesTomeTitle
+\end{minipage}
+\newpage}
+
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+% Reverse side of first title page (quote resp. dedication)
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+\newcommand{\seriesFirstTitlePageReverse}{
+\thispagestyle{empty}
+\mbox{ }
+\newpage}
+
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+% Second title page (with author, title, publisher, year)
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+\newcommand{\seriesSecondTitlePage}{
+\thispagestyle{empty}
+\vspace*{-0.2mm}
+\begin{center}{\large \seriesAuthorColor}\end{center}
+\vspace{2.4mm}
+\noindent
+\begin{minipage}[t][90mm][t]{\textwidth}
+\seriesTomeTitle
+\end{minipage}
+\vspace{8.5mm}
+\begin{center}\includegraphics[scale=0.05]{../../i-logo-artecat.png}\end{center}
+\begin{center}Artecat\end{center}
+\vspace{-6.5mm}
+\begin{center}\seriesTomeEditionYearFirstPublished\end{center}
+\newpage}
+
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+% Reverse side of second title page (copyright, first printed, ISBN, publisher)
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+\newcommand{\seriesSecondTitlePageReverse}{
+\thispagestyle{empty}
+\mbox{ }\par
+\vspace{113.3mm}\par
+\small
+\noindent
+Copyright \copyright\ \seriesTomeEditionYearsCopyright\hspace{0.15mm} \seriesAuthor\newline
+\en{All rights reserved}\de{Alle Rechte Vorbehalten}.\newline\par
+\vspace{-3mm}\noindent
+\en{First printing}\de{Erstdruck}: \seriesTomeEditionYearFirstPublished\newline\par
+\vspace{-3mm}\noindent
+ISBN \seriesTomeEditionISBN\newline\par
+\vspace{-3mm}\noindent
+\textcolor{seriesGray}{exactphilosophy.net \en{series}\de{reihe} $\cdot$
+  \en{tome}\de{band} \seriesTomeNo\ $\cdot$
+  \en{edition}\de{ausgabe} \seriesTomeEditionNo}\newline\par
+\vspace{-3mm}\noindent
+Artecat Alain Stalder, Adliswil, \en{Switzerland}\de{Schweiz}\newline\par
+\vspace{-3mm}\noindent
+artecat.ch\par
+\normalsize
+\newpage}
+
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+% Table of contents
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+% TODO Seems that only the first page of the toc is without page number...
+\newcommand{\seriesTableOfContents}{
+\tableofcontents
+\thispagestyle{empty}
+\newpage}
+
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+% Empty page
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+\newcommand{\seriesEmptyPage}{
+\thispagestyle{empty}
+\mbox{ }
+\newpage}
+
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+% Final page with only artecat logo
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+\newcommand{\seriesFinalPageArtecatLogo}{
+\newpage
+\thispagestyle{empty}
+\begin{center}\includegraphics[scale=0.05]{../../i-logo-artecat.png}\end{center}}
+
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+% Back cover (for digital versions only)
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+\newcommand{\seriesBackCover}{
+\newpage
+\thispagestyle{empty}
+\mbox{\ }
+\thispagestyle{empty}
+\en{\includepdf{\txex-en-back.png}}%
+\de{\includepdf{\txex-de-back.png}}}
+
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+% About this exactphilosophy.net series
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+\newcommand{\seriesAboutSection}{
+\section{\en{About this series}\de{Über diese Reihe}}
+
+\en{In this \textcolor{seriesGray}{exactphilosophy.net series} of pocket books,
+I hope to convey some fascinating novel ideas and findings,
+roughly one topic per tome,
+both in very simple words and beautifully presented with color illustrations.}%
+\de{In dieser \textcolor{seriesGray}{exactphilosophy.net reihe} von kleinen Taschenbüchern,
+hoffe ich, faszinierende neuartige Ideen und Funde zu vermitteln,
+grob ein Thema pro Band,
+in sehr einfachen Worten und schön präsentiert mit farbigen Illustrationen.}
+
+\en{Other than on my website,
+which is rather focused on researching fundamental questions,
+here I try to keep things as simple as possible to carve out each idea.}%
+\de{Anders als auf meiner Website,
+die eher darauf fokussiert, fundamentale Fragen zu erforschen,
+versuche ich hier, die Dinge so einfach wie möglich zu halten, um jede Idee einzeln herauszukristallisieren.}
+
+\en{Feel free to start with any tome,
+while the first tome presents sort of an overarching idea,
+which may or may not be how it “really” is;
+I am not sure, but remain curious.}%
+\de{Fühlt euch frei, mit irgendeinem Band zu beginnen,
+wobei der erste Band sowas wie eine übergreifende Idee präsentiert,
+welche sein könnte, wie es “wirklich” ist, oder auch nicht;
+ich bin mir da nicht sicher, bleibe aber neugierig.}
+
+\en{All tomes are available for free on my website in digital form already while writing
+and once finished usually also as printed pocket books from your favorite bookstores.}%
+\de{Alle Bände sind auf meiner Website bereits während dem Schreiben gratis in digitaler Form erhältlich
+und wenn fertig normalerweise auch als gedruckte Taschenbüchlein über die Buchhändler eurer Wahl.}
+
+\en{Enjoy fantastic new worlds\,!}%
+\de{Erlebt fantastische neue Welten\,!}
+
+\vspace{2mm}
+\noindent
+\en{Alain Stalder (*1966 in Zürich, PhD in physics)}%
+\de{Alain Stalder (*1966 in Zürich, Dr.~in Physik)}
+
+\newpage}

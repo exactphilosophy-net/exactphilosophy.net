@@ -1,0 +1,296 @@
+% !TEX TS-program = lualatex
+
+\newcommand{\seriesTomeEditionNo}{1}
+\newcommand{\seriesTomeNo}{1}
+
+% For including core web pages (trim: left, bottom, right, top)
+\newcommand{\bookWeb}[3]{\newpage\noindent%
+\includegraphics[trim=18.16mm 20mm 10mm 18.3mm, page=#3, scale=1.065]%
+{\txex s/#1/#1#2.pdf}}
+
+
+% Title as text (not used so far)
+\newcommand{\seriesTomeTitleText}{\en{Space Time Elements}\de{Raum Zeit Elemente}}
+
+% Title in color as used on title pages
+\newcommand{\seriesTomeTitle}{%
+\begin{center}{\huge
+\en{\seriesWhite{Space}\hspace{-0.02em}
+\seriesRed{Time}\hspace{0.02em}
+\seriesBlack{Elements}}%
+\de{\seriesWhite{Raum}\hspace{0.03em}
+\seriesRed{Zeit}\hspace{0.04em}
+\seriesBlack{Elemente}}}
+\end{center}}
+
+% TODO ISBN correct?
+%\newcommand{\seriesTomeEditionISBN}{\en{978-3-906914-06-0}\de{978-3-906914-08-4}}
+\newcommand{\seriesTomeEditionISBN}{{\color{red}ONLINE SNAPSHOT \DTMnow}}
+
+% TODO year(s) correct?
+% TODO definition correct?
+% Year or year span (20xx-20yy) of copyright for tome edtition,
+% i.e. from first edition to current edition
+%\newcommand{\seriesTomeEditionYearsCopyright}{2027}
+\newcommand{\seriesTomeEditionYearsCopyright}{2025-\en{now}\de{jetzt}}
+
+% TODO year correct?
+% TODO definition correct?
+% Year the current edition (identified via ISBN) was published
+%\newcommand{\seriesTomeEditionYearFirstPublished}{2027}
+\newcommand{\seriesTomeEditionYearFirstPublished}{\the\year}
+
+\seriesFrontCover
+
+\seriesFirstTitlePage
+\seriesFirstTitlePageReverse
+\seriesSecondTitlePage
+\seriesSecondTitlePageReverse
+\seriesTableOfContents
+
+%\seriesEmptyPage
+\seriesAboutSection
+
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+\section{\en{Preface}\de{Vorwort}}
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+\en{…}%
+\de{…}
+
+%\en{My first contact with philosophy was when I was around ten years old.}%
+%\de{Mein erster Kontakt mit Philosophie war als ich etwa zehn Jahre alt war.}
+%%
+%\en{Me and my father were riding on a chairlift in winter
+%and my father told me Plato's \textsl{Allegory of the Cave}
+%with ants sitting in their earth
+%and just seeing the shadows of the chairs of the chairlift
+%cast into the snow in front of them.}%
+%\de{Ich und mein Vater fuhren auf einem Sessellift im Winter
+%und mein Vater erzählte mir Platons \textsl{Höhlengleichnis}
+%mit Ameisen, die in ihrem Bau sind
+%und nur die Schatten der Sessel des Sessellifts sehen,
+%die vor ihnen in den Schnee geworfen werden.}
+%%
+%\en{What would they imagine the world to be
+%with shadows of skiers on chairs rolling by,
+%one after the other?}%
+%\de{Wie würden sie sich die Welt vorstellen,
+%mit Schatten von Skifahrern auf Sesseln,
+%die einer nach dem anderen vorbeiziehen würden?}
+%
+%\en{I guess that relativizes almost anything you could write in any book…}%
+%\de{Ich würde sagen, das relativiert fast alles, was man je in irgendeinem Buch schreiben könnte…}
+%
+%\en{Still, there are very interesting new ideas in this book,
+%mostly pragmatic new approaches to questions
+%that were considered since at least the ancient Greeks.}%
+%\de{Und doch hat es sehr interessante neue Ideen in diesem Buch,
+%vorwiegend pragmatische neue Zugänge zu Fragen,
+%die schon seit mindestens den alten Griechen betrachtet wurden.}
+%
+%\en{The immediate perception of space and time in personal experience
+%seems to lead to something that is very similar to
+%especially Aristotle’s views on the classical elements
+%Fire, Air, Water and Earth, plus the fifth, Ether.}%
+%\de{Die unmittelbare Wahrnehmung von Raum und Zeit in der persönlichen Erfahrung
+%scheint zu etwas zu führen,
+%das insbesondere Aristoteles’ Ansichten über die klassischen Elemente
+%Feuer, Luft, Wasser und Erde sowie dem fünften, dem Äther,
+%sehr ähnlich ist.}
+%
+%\en{And things would seem to even go way beyond that.}%
+%\de{Und es schiene sogar noch viel weiter zu gehen.}
+%
+%\en{But so far this is largely just what I found over the years.}%
+%\de{Aber soweit ist das weitgehend nur, was ich über die Jahre gefunden habe.}
+%%
+%\en{Wikipedia would categorize it as “original work”,
+%while I am still a physicist with a PhD,
+%so personally I do see it as relevant research in many ways.}%
+%\de{Wikipedia würde es als “original work” kategorisieren,
+%wohingegen ich immer noch promovierter Physiker hin,
+%also persönlich es als in vielerlei Hinsicht relevante Forschung erachte.}
+%
+%\en{But see for yourselves on the following pages.}%
+%\de{Aber seht selbst auf den folgenden Seiten.}
+%%
+%\en{And remember:
+%This is just a first glimpse at something very interesting
+%with maybe lots of potential,
+%but not yet a closed and verified scientific theory.}%
+%\de{Und vergesst nicht:
+%Soweit ist das hier erst ein erster Einblick in etwas sehr Interessantes
+%mit vielleicht sehr viel Potential,
+%aber noch keine abgeschlossene und verifizierte wissenschaftliche Theorie.}
+%
+%\vspace{3mm}
+%\noindent
+%\en{Adliswil (near Zürich), 1 June 2025\newline}%
+%\de{Adliswil (nahe Zürich), 1.~Juni 2025\newline}
+%Alain Stalder
+
+
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+%\chapter{Introduction}
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+%\noindent
+%In late 2017, Google’s DeepMind AlphaZero AI program
+%beat the then strongest chess program Stockfish easily, at
+%a time when humans did not have any chance any more
+%anyways. But the way AlphaZero won was what was
+%really astonishing. Unlike chess programs before it, it had
+%not learned from previous games played by humans (or
+%machines), it had learned strictly only from the chess rules.
+%
+%This book has quite a similar approach to reality and the
+%world, only so far not with AI, but with good old human
+%reasoning. The starting point here is a completely fresh
+%look at the world, one that does not assume anything about
+%the world to be known, as if just having opened one’s eyes
+%(and all other senses) to the world for the first time ever
+%and trying to make sense of all that is going on in what
+%seems to be an ‘outside‘ and an ‘inside’.
+%
+%AlphaZero made moves nobody expected, sometimes
+%even sacrificing the strongest piece on the board, the queen,
+%which humans almost never do. Similarly, even though
+%the findings here usually closely mirror previous findings of
+%humans about life and the world that have been acquired
+%across millenia, sometimes they differ, as follows…
+%
+%Since the approach here is strictly scientific in the sense
+%that it all starts with observation and tries to be as logically
+%consistent as ever possible, it is never in contradiction with
+%any verifiable facts that science can regularly predict.
+%
+%But the approach also naturally leads to concepts that
+%are not directly part of contemporary science. For example,
+%one of the first concepts that appears is that there would be
+%something that comes in 4+1 ‘parts’ and has astonishing
+%similarities with ancient ideas about 4+1 elements (“fire,
+%air, water, earth” and “ether”), or also the similar concept
+%of eight trigrams of the Chinese I Ching, only in both cases
+%in a more modern and well-defined way. And also emerging
+%quickly is a more modern view of something that was often
+%called and perceived as gods and godesses in the past, or
+%similar concepts like a collective unconscious or a world
+%soul, only here explained more scientifically as unconscious
+%collective connections and effects.
+%
+%It is important to note that the two things I just mentioned,
+%concepts that resemble ancient elements and deities,
+%seem to follow quite naturally and quite quickly from that
+%fresh look at the world, about as astonishingly as some of
+%AlphaZero’s moves. Of course, so far (in the first part of
+%the 21st century), it has just been me doing this, so my
+%approach might be biased or overlook other possibilities,
+%but it clearly shows that there is more to be found with
+%that approach. So, if you are looking for something novel
+%to do, this might be a really good opportunity\,!
+
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+%\en{\chapter[Elements as Space and Time]{Elements as\newline Space and Time}}%
+%\de{\chapter[Elemente als Raum und Zeit]{Elemente als\newline Raum und Zeit}}
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+%\en{\chapter[Deities as Collective Effects]{Deities as\newline Collective Effects}}%
+%\de{\chapter[Gottheiten als kollektive Effekte]{Gottheiten als\newline kollektive Effekte}}
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+%\en{\chapter[Astrology Void of Stars]{Astrology\newline Void of Stars}}%
+%\de{\chapter[Astrologie ohne Sterne]{Astrologie\newline ohne Sterne}}
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+%\en{\chapter[Miscellaneous ‘Phenomena’]{Miscellaneous\newline ‘Phenomena’}}%
+%\de{\chapter[Verschiedene ‘Phänomene’]{Verschiedene\newline ‘Phänomene’}}
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+\addcontentsline{toc}{chapter}{\en{Appendix}\de{Anhang}: exactphilosophy.net}
+\chapter*{\en{Appendix}\de{Anhang}:\newline{exactphilosophy.net}}%
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+\en{This chapter reproduces the core content of my website
+\href{https://www.exactphilosophy.net/}{\color{seriesXphi}{exactphilosophy.net}}
+at the time of writing.}%
+\de{Dieses Kapitel gibt den Kerninhalt meiner Website
+\href{https://www.exactphilosophy.net/}{\color{seriesXphi}{exactphilosophy.net}}
+zur Zeit des Schreibens wieder.}
+
+\en{The style is very minimalist,
+both from a scientific and an artistic perspective,
+in the hope to come close to nature.}%
+\de{Der Stil ist sehr minimalistisch,
+sowohl aus wissenschaftlicher wie auch aus künstlerischer Perspektive,
+in der Hoffnung,
+der Natur nahe zu kommen.}
+
+\en{It is the fruit of countless hours since at least 2005.}%
+\de{Der englische Text ist die Frucht ungezählter Stunden seit mindestens 2005.
+Die deutsche Übersetzung,
+die im Wesentlichen im Juli 2023 innerhalb weniger Tage entstand,
+ist auch schön,
+wird aber wohl nie ganz so schön sein können,
+auch wenn sie ganz eigene schöne Eigenschaften hat.}
+
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+% Include web pages
+%••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
+
+\newcommand{\toctypewelcome}{section}
+\newcommand{\toctitlewelcome}{\en{Welcome}\de{Willkommen}}
+
+\newcommand{\toctypeway}{section}
+\newcommand{\toctitleway}{\en{way}\de{weg}}
+\newcommand{\toctypespacetime}{subsection}
+\newcommand{\toctitlespacetime}{\en{space and time}\de{raum und zeit}}
+\newcommand{\toctypemetamorphosis}{subsection}
+\newcommand{\toctitlemetamorphosis}{\en{metamorphosis}\de{metamorphose}}
+\newcommand{\toctypegreek}{subsection}
+\newcommand{\toctitlegreek}{\en{greek philosophy}\de{griechische philosophie}}
+\newcommand{\toctypeiching}{subsection}
+\newcommand{\toctitleiching}{\en{i ching}\de{i ging}}
+\newcommand{\toctypeorigins}{subsection}
+\newcommand{\toctitleorigins}{\en{origins}\de{ursprünge}}
+
+\newcommand{\toctypeevolutions}{section}
+\newcommand{\toctitleevolutions}{\en{evolutions}\de{evolutionen}}
+\newcommand{\toctypefeelings}{subsection}
+\newcommand{\toctitlefeelings}{\en{mixed feelings}\de{gemischte gefühle}}
+\newcommand{\toctypestarsigns}{subsection}
+\newcommand{\toctitlestarsigns}{\en{star signs}\de{sternzeichen}}
+\newcommand{\toctypeartemis}{subsection}
+\newcommand{\toctitleartemis}{\en{artemis}\de{artemis}}
+
+\newcommand{\toctypesynthesis}{section}
+\newcommand{\toctitlesynthesis}{\en{synthesis}\de{synthese}}
+\newcommand{\toctypemeasurement}{subsection}
+\newcommand{\toctitlemeasurement}{\en{measurement}\de{messung}}
+\newcommand{\toctypepsyche}{subsection}
+\newcommand{\toctitlepsyche}{\en{psyche}\de{psyche}}
+\newcommand{\toctypedreams}{subsection}
+\newcommand{\toctitledreams}{\en{dreams}\de{träume}}
+
+\newcommand{\toctypereferences}{section}
+\newcommand{\toctitlereferences}{\en{References}\de{Referenzen}}
+
+\newcommand{\toctypeseries}{section}
+\newcommand{\toctitleseries}{\en{Series}\de{Reihe}}
+
+\newcommand{\toctypelinks}{section}
+\newcommand{\toctitlelinks}{\en{Links}\de{Links}}
+
+\en{\input{\txex s/web-en.inc}}%
+\de{\input{\txex s/web-de.inc}}
+
+\seriesFinalPageArtecatLogo
+% no empty pages at the end needed; ingramspark adds
+% 2 or 3 pages to make even plus printer's page with bar code;
+% just add also 2 or 3 pages when getting the cover template.
+
+\seriesBackCover
